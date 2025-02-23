@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float Market - Best CS2 Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        :root {
+            --primary: #ffd700;
+            --primary-dark: #ccac00;
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --bg-card: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --border-color: #2a2a2a;
+            --button-primary: #0066ff;
+            --gradient-start: #1a1a1a;
+            --gradient-end: #0f0f18;
+        }
+
+        body {
+            background-color: var(--bg-darker);
+            color: var(--text-primary);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .top-nav {
+            background-color: rgba(15, 15, 24, 0.95);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a:not(.logo)::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.2s;
+        }
+
+        .nav-links a:not(.logo):hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .currency-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .currency-select:hover {
+            border-color: var(--primary);
+        }
+
+        .sign-in-button {
+            background-color: #5c2cf1;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .sign-in-button:hover {
+            background-color: #4a23c2;
+            transform: translateY(-1px);
+        }
+
+        .steam-icon {
+            width: 24px;
+            height: 24px;
+        }
+        .skin-showcase img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 24px rgba(92, 44, 241, 0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .skin-showcase img:hover {
+            transform: scale(1.05);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 2rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(92, 44, 241, 0.05) 0%, transparent 70%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(30, 30, 30, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .hero-skins {
+            position: relative;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .skin-showcase {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .skin-showcase img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 24px rgba(92, 44, 241, 0.2));
+        }
+
+        .ak47-neon {
+            transform: rotate(-5deg) translateY(-20px);
+        }
+
+        .m4a1-golden {
+            transform: rotate(3deg) translateY(20px);
+        }
+
+        .knife-fade {
+            position: absolute;
+            bottom: 50px;
+            right: 0;
+            width: 60%;
+            transform: rotate(10deg);
+        }
+
+        .skin-label {
+            position: absolute;
+            left: 20px;
+            bottom: -30px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(15, 15, 24, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            backdrop-filter: blur(4px);
+        }
+
+        .skin-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #5c2cf1;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text {
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-skins {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-skins {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-links">
+            <a href="/" class="logo">FLOAT MARKET</a>
+            <a href="/market">Market</a>
+            <a href="/database">Database</a>
+        </div>
+        <div class="top-nav-right">
+            <select class="currency-select">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+            </select>
+            <% if (!user) { %>
+                <a href="/auth/steam">Sign in with Steam</a>
+            <% } else { %>
+                <a href="/profile">Welcome, <%= user.displayName %></a> |
+                <a href="/logout">Logout</a>
+            <% } %>
+            
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">The Best CS2<br>Marketplace</h1>
+                <p class="hero-subtitle">Buy and sell CS2 skins with unparalleled ease and security. Get the best deals on the most advanced trading platform.</p>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <h3 class="feature-title">Instant Trading</h3>
+                        <p class="feature-description">Lightning-fast transactions with immediate delivery. No waiting time, no hassle.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Secure Payments</h3>
+                        <p class="feature-description">Your transactions are protected with state-of-the-art security measures.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Best Prices</h3>
+                        <p class="feature-description">Get the most competitive prices in the market with our advanced pricing system.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">24/7 Support</h3>
+                        <p class="feature-description">Our support team is always available to help you with any issues.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-skins">
+                <div class="skin-showcase ak47-neon">
+                    <img src="path-to-m4a4-gold-image.png" alt="AK-47 Neon" class="skin-image">
+                </div>
+                <div class="skin-showcase m4a1-golden">
+                    <img src="path-to-m4a4-gold-image.png" alt="M4A1 Golden" class="skin-image">
+                </div>
+                <div class="skin-label">
+                    <span>AK-47 Neon</span>
+                </div>
+                <div class="skin-label" style="bottom: -30px; left: 20px;">
+                    <span>M4A1 Golden</span>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+</body>
+</html>
