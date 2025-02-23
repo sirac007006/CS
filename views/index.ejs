@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS2 Float Trading</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo">FLOAT MARKET</div>
+        <div class="top-nav-right">
+            <div class="balance">1337.00 €</div>
+            <div class="user-menu">
+                <span>Cart (0)</span>
+                <span>Profile</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="category-nav">
+        <div class="nav-left">
+            <button class="wear-badge active">All Items</button>
+            <button class="wear-badge">Special Items</button>
+            <button class="wear-badge">Sticker Crafts</button>
+        </div>
+        <select class="sort-select">
+            <option value="best_deals">Best Deals</option>
+            <option value="lowest_float">Lowest Float</option>
+            <option value="highest_float">Highest Float</option>
+            <option value="lowest_price">Lowest Price</option>
+            <option value="highest_price">Highest Price</option>
+        </select>
+    </div>
+
+    <div class="main-content">
+        <div class="filters-sidebar">
+            <div class="filter-section">
+                <div class="filter-title">Search</div>
+                <input type="text" class="search-input" placeholder="Search items...">
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Float Range</div>
+                <div class="wear-slider"></div>
+                <div class="wear-inputs">
+                    <input type="text" class="wear-input" placeholder="Min">
+                    <input type="text" class="wear-input" placeholder="Max">
+                </div>
+                <div class="wear-badges">
+                    <span class="wear-badge">FN</span>
+                    <span class="wear-badge active">MW</span>
+                    <span class="wear-badge">FT</span>
+                    <span class="wear-badge">WW</span>
+                    <span class="wear-badge">BS</span>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Price Range</div>
+                <div class="wear-inputs">
+                    <input type="text" class="wear-input" placeholder="Min €">
+                    <input type="text" class="wear-input" placeholder="Max €">
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Collection</div>
+                <select class="collection-select">
+                    <option value="">All Collections</option>
+                    <option value="revolution">Revolution Case</option>
+                    <option value="recoil">Recoil Case</option>
+                    <option value="dreams">Dreams & Nightmares Case</option>
+                    <option value="2022">2022 Train Collection</option>
+                    <option value="2021">2021 Dust 2 Collection</option>
+                    <option value="2021">2021 Mirage Collection</option>
+                    <option value="2021">2021 Vertigo Collection</option>
+                    <option value="2021">2021 Train Collection</option>
+                    <option value="anubis">Anubis Collection</option>
+                    <option value="ancient">Ancient Collection</option>
+                    <option value="havoc">Havoc Collection</option>
+                    <option value="control">Control Collection</option>
+                    <option value="snake">Snake Collection</option>
+                    <option value="canals">Canals Collection</option>
+                    <option value="cobble">Cobblestone Collection</option>
+                    <option value="inferno">2018 Inferno Collection</option>
+                    <option value="norse">Norse Collection</option>
+                    <option value="nuke">2018 Nuke Collection</option>
+                    <option value="gods">Gods and Monsters Collection</option>
+                    <option value="chop">Chop Shop Collection</option>
+                    <option value="rising">Rising Sun Collection</option>
+                    <option value="baggage">Baggage Collection</option>
+                    <option value="overpass">Overpass Collection</option>
+                    <option value="cache">Cache Collection</option>
+                    <option value="stmarc">St. Marc Collection</option>
+                    <option value="italy">Italy Collection</option>
+                    <option value="lake">Lake Collection</option>
+                    <option value="safehouse">Safehouse Collection</option>
+                    <option value="train">Train Collection</option>
+                    <option value="militia">Militia Collection</option>
+                    <option value="assault">Assault Collection</option>
+                    <option value="office">Office Collection</option>
+                    <option value="dust">Dust Collection</option>
+                    <option value="aztec">Aztec Collection</option>
+                    <option value="vertigo">Vertigo Collection</option>
+                    <option value="bank">Bank Collection</option>
+                </select>
+
+                <div class="filter-title">Item Type</div>
+                <div class="type-badges">
+                    <span class="wear-badge active">Normal</span>
+                    <span class="wear-badge">StatTrak™</span>
+                    <span class="wear-badge">Souvenir</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-image"></div>
+                <div class="item-details">
+                    <div class="item-name">AWP | Dragon Lore</div>
+                    <div class="float-value">Float: 0.0182991884</div>
+                    <div class="float-bar">
+                        <div class="float-indicator" style="left: 18%"></div>
+                    </div>
+                    <div class="price">11,374.70 €</div>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-image"></div>
+                <div class="item-details">
+                    <div class="item-name">★ Karambit | Fade</div>
+                    <div class="float-value">Float: 0.0092847563</div>
+                    <div class="float-bar">
+                        <div class="float-indicator" style="left: 9%"></div>
+                    </div>
+                    <div class="price">1,476.60 €</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
