@@ -1,0 +1,31 @@
+{
+  "name": "cs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sirac007006/CS.git"
+  },
+  "author": "Marko Ivanovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sirac007006/CS/issues"
+  },
+  "homepage": "https://github.com/sirac007006/CS#readme",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.11.3"
+  }
+}
