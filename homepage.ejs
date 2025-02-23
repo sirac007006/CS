@@ -133,6 +133,17 @@
             width: 24px;
             height: 24px;
         }
+        .skin-showcase img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 24px rgba(92, 44, 241, 0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .skin-showcase img:hover {
+            transform: scale(1.05);
+        }
 
         .hero {
             background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
@@ -376,4 +387,20 @@
             
             <div class="hero-skins">
                 <div class="skin-showcase ak47-neon">
-                    <img src=""
+                    <img src="https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/weapon_cases/crate_community_3_png.png" alt="AK-47 Neon" class="skin-image">
+                </div>
+                <div class="skin-showcase m4a1-golden">
+                    <img src="https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_deagle_hy_ddpat_urb_light_png.png" alt="M4A1 Golden" class="skin-image">
+                </div>
+                <div class="skin-label">
+                    <span>AK-47 Neon</span>
+                </div>
+                <div class="skin-label" style="bottom: -30px; left: 20px;">
+                    <span>M4A1 Golden</span>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+</body>
+</html>
