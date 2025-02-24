@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float Market - Best CS2 Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        :root {
+            --primary: #ffd700;
+            --primary-dark: #ccac00;
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --bg-card: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --border-color: #2a2a2a;
+            --button-primary: #5c2cf1;
+            --gradient-start: #1a1a1a;
+            --gradient-end: #0f0f18;
+            --footer-bg: #111111;
+        }
+
+        body {
+            background-color: var(--bg-darker);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Main Navigation */
+        .top-nav {
+            background-color: #1e1e1e;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-left: auto;
+        }
+
+        .currency-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .sign-in-button {
+            background-color: var(--button-primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .sign-in-button:hover {
+            background-color: #4a23c2;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 2rem;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(92, 44, 241, 0.05) 0%, transparent 70%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(30, 30, 30, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .hero-skins {
+            position: relative;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .skin-showcase {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .skin-showcase img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 24px rgba(92, 44, 241, 0.2));
+        }
+
+        .ak47-neon {
+            transform: rotate(-5deg) translateY(-20px);
+        }
+
+        .m4a1-golden {
+            transform: rotate(3deg) translateY(20px);
+        }
+
+        .skin-label {
+            position: absolute;
+            left: 20px;
+            bottom: -30px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(15, 15, 24, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            backdrop-filter: blur(4px);
+        }
+
+        .skin-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #5c2cf1;
+            border-radius: 50%;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: var(--footer-bg);
+            padding: 2rem 4rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .social-links a:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text {
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-skins {
+                height: 400px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-skins {
+                height: 300px;
+            }
+
+            .footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Navigation -->
+    <nav class="top-nav">
+        <a href="/" class="logo">Float Market</a>
+        <div class="nav-links">
+            <a href="/market">Market</a>
+            <a href="/database">Database</a>
+        </div>
+        <div class="top-nav-right">
+            <select class="currency-select">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+            </select>
+            <% if (!user) { %>
+                <a class="sign-in-button" href="/auth/steam">Sign in with Steam</a>
+            <% } else { %>
+                <a href="/profile">Welcome, <%= user.displayName %></a> |
+                <a href="/logout">Logout</a>
+            <% } %>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">The Best CS2<br>Marketplace</h1>
+                <p class="hero-subtitle">Buy and sell CS2 skins with unparalleled ease and security. Get the best deals on the most advanced trading platform.</p>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <h3 class="feature-title">Instant Trading</h3>
+                        <p class="feature-description">Lightning-fast transactions with immediate delivery. No waiting time, no hassle.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Secure Payments</h3>
+                        <p class="feature-description">Your transactions are protected with state-of-the-art security measures.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Best Prices</h3>
+                        <p class="feature-description">Get the most competitive prices in the market with our advanced pricing system.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">24/7 Support</h3>
+                        <p class="feature-description">Our support team is always available to help you with any issues.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-skins">
+                <div class="skin-showcase ak47-neon">
+                    <img src="C:\Users\jakov\OneDrive\Radna površina\CS2\public\path-to-knife-image.jpg" alt="AK-47 Neon">
+                    <div class="skin-label">
+                        <span>AK-47 Neon</span>
+                    </div>
+                </div>
+                <div class="skin-showcase m4a1-golden">
+                    <img src="C:\Users\jakov\OneDrive\Radna površina\CS2\public\path-to-m4a4-gold-image.png" alt="M4A1 Golden">
+                    <div class="skin-label">
+                        <span>M4A1 Golden</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Products</h3>
+                <ul class="footer-links">
+                    <li><a href="/market">Market</a></li>
+                    <li><a href="/database">Database</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Socials</h3>
+                <ul class="footer-links">
+                    <li><a href="">Discord Server</a></li>
+                    <li><a href="">Steam Group</a></li>
+                    <li><a href="">X</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© market Inc.

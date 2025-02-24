@@ -8,13 +8,17 @@
 </head>
 <body>
     <nav class="top-nav">
-        <div class="logo">FLOAT MARKET</div>
+        <div class="nav-links">
+            <a href="/" class="logo">FLOAT MARKET</a>
+            <a href="/market" class="active">Market</a>
+            <a href="/database">Database</a>
+        </div>
         <div class="top-nav-right">
-            <div class="balance">1337.00 €</div>
-            <div class="user-menu">
-                <span>Cart (0)</span>
-                <span>Profile</span>
-            </div>
+            <form class="user-form">
+                <span class="balance">1337.00 €</span>
+                <a href="/cart">Cart (0)</a>
+                <a href="/profile">Profile</a>
+            </form>
         </div>
     </nav>
 
@@ -33,26 +37,26 @@
         </select>
     </div>
 
-    <div class="main-content">
+    <form class="main-content" method="post" action="/filter">
         <div class="filters-sidebar">
             <div class="filter-section">
                 <div class="filter-title">Search</div>
-                <input type="text" class="search-input" placeholder="Search items...">
+                <input type="text" name="search" class="search-input" placeholder="Search items...">
             </div>
 
             <div class="filter-section">
                 <div class="filter-title">Float Range</div>
                 <div class="wear-slider"></div>
                 <div class="wear-inputs">
-                    <input type="text" class="wear-input" placeholder="Min">
-                    <input type="text" class="wear-input" placeholder="Max">
+                    <input type="text" name="minf" class="wear-input" placeholder="Min">
+                    <input type="text" name="maxf" class="wear-input" placeholder="Max">
                 </div>
                 <div class="wear-badges">
-                    <span class="wear-badge">FN</span>
-                    <span class="wear-badge active">MW</span>
-                    <span class="wear-badge">FT</span>
-                    <span class="wear-badge">WW</span>
-                    <span class="wear-badge">BS</span>
+                    <span class="wear-badge" name="floatbtn">FN</span>
+                    <span class="wear-badge active" name="floatbtn">MW</span>
+                    <span class="wear-badge" name="floatbtn">FT</span>
+                    <span class="wear-badge" name="floatbtn">WW</span>
+                    <span class="wear-badge" name="floatbtn">BS</span>
                 </div>
             </div>
 
@@ -68,42 +72,9 @@
                 <div class="filter-title">Collection</div>
                 <select class="collection-select">
                     <option value="">All Collections</option>
-                    <option value="revolution">Revolution Case</option>
-                    <option value="recoil">Recoil Case</option>
-                    <option value="dreams">Dreams & Nightmares Case</option>
-                    <option value="2022">2022 Train Collection</option>
-                    <option value="2021">2021 Dust 2 Collection</option>
-                    <option value="2021">2021 Mirage Collection</option>
-                    <option value="2021">2021 Vertigo Collection</option>
-                    <option value="2021">2021 Train Collection</option>
-                    <option value="anubis">Anubis Collection</option>
-                    <option value="ancient">Ancient Collection</option>
-                    <option value="havoc">Havoc Collection</option>
-                    <option value="control">Control Collection</option>
-                    <option value="snake">Snake Collection</option>
-                    <option value="canals">Canals Collection</option>
-                    <option value="cobble">Cobblestone Collection</option>
-                    <option value="inferno">2018 Inferno Collection</option>
-                    <option value="norse">Norse Collection</option>
-                    <option value="nuke">2018 Nuke Collection</option>
-                    <option value="gods">Gods and Monsters Collection</option>
-                    <option value="chop">Chop Shop Collection</option>
-                    <option value="rising">Rising Sun Collection</option>
-                    <option value="baggage">Baggage Collection</option>
-                    <option value="overpass">Overpass Collection</option>
-                    <option value="cache">Cache Collection</option>
-                    <option value="stmarc">St. Marc Collection</option>
-                    <option value="italy">Italy Collection</option>
-                    <option value="lake">Lake Collection</option>
-                    <option value="safehouse">Safehouse Collection</option>
-                    <option value="train">Train Collection</option>
-                    <option value="militia">Militia Collection</option>
-                    <option value="assault">Assault Collection</option>
-                    <option value="office">Office Collection</option>
-                    <option value="dust">Dust Collection</option>
-                    <option value="aztec">Aztec Collection</option>
-                    <option value="vertigo">Vertigo Collection</option>
-                    <option value="bank">Bank Collection</option>
+                    <%for(let i = 0; i<collectionsLength; i++){%>
+                        <option value="<%=collections[i].name%>" type="submit" name="collection"><%=collections[i].name%></option>
+                    <%}%>
                 </select>
 
                 <div class="filter-title">Item Type</div>
@@ -114,32 +85,82 @@
                 </div>
             </div>
         </div>
-
         <div class="items-grid">
-            <div class="item-card">
-                <div class="item-image"></div>
-                <div class="item-details">
-                    <div class="item-name">AWP | Dragon Lore</div>
-                    <div class="float-value">Float: 0.0182991884</div>
-                    <div class="float-bar">
-                        <div class="float-indicator" style="left: 18%"></div>
+            <% for (let i = 0; i < items.length; i++) {%>
+                <div class="item-card">
+                    <div><img class="item-image" src="<%=items[i].image%>" alt="Item Image"></div>
+                    <div class="item-details">
+                        <div class="item-name"><%=items[i].name%></div>
+                        <div class="float-value">Float: <%=items[i].max_float%></div>
+                        <div class="float-bar">
+                            <div class="float-indicator" style="left: <%items[i].max_float%>%"></div>
+                        </div>
+                        <div class="price"><%=items[i].table_id%></div>
                     </div>
-                    <div class="price">11,374.70 €</div>
                 </div>
-            </div>
-
-            <div class="item-card">
-                <div class="item-image"></div>
-                <div class="item-details">
-                    <div class="item-name">★ Karambit | Fade</div>
-                    <div class="float-value">Float: 0.0092847563</div>
-                    <div class="float-bar">
-                        <div class="float-indicator" style="left: 9%"></div>
-                    </div>
-                    <div class="price">1,476.60 €</div>
-                </div>
-            </div>
+            <% } %>
         </div>
-    </div>
+        
+    </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".search-input");
+    const collectionSelect = document.querySelector(".collection-select");
+
+    function sendFilterRequest() {
+        const query = searchInput.value;
+        const selectedCollection = collectionSelect.value;
+        
+        console.log("Sending query:", { search: query, collection: selectedCollection }); // Debug ispis
+
+        fetch("/filter", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ search: query, collection: selectedCollection }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Response from server:", data); // Debug ispis odgovora
+            updateItemsGrid(data.items);
+        })
+        .catch(error => console.error("Error:", error));
+    }
+
+    // Event listener za pretragu
+    searchInput.addEventListener("input", sendFilterRequest);
+    
+    // Event listener za kolekciju
+    collectionSelect.addEventListener("change", sendFilterRequest);
+});
+
+
+    
+            function updateItemsGrid(items) {
+                const itemsGrid = document.querySelector(".items-grid");
+                itemsGrid.innerHTML = ""; // Brisanje prethodnih stavki
+    
+                items.forEach(item => {
+                    const itemCard = document.createElement("div");
+                    itemCard.classList.add("item-card");
+    
+                    itemCard.innerHTML = `
+                        <div><img class="item-image" src="${item.image}" alt="Item Image"></div>
+                        <div class="item-details">
+                            <div class="item-name">${item.name}</div>
+                            <div class="float-value">Float: ${item.max_float}</div>
+                            <div class="float-bar">
+                                <div class="float-indicator" style="left: ${item.max_float}%"></div>
+                            </div>
+                            <div class="price">${item.table_id}</div>
+                        </div>
+                    `;
+    
+                    itemsGrid.appendChild(itemCard);
+                });
+            }
+    </script>
+    
 </body>
 </html>
