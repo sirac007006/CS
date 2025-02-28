@@ -99,9 +99,31 @@ async function getItems() {
     const result = (await db.query("SELECT * FROM skins")).rows;
     return result;
 }
+async function getCharms() {
+    const result = (await db.query("SELECT * FROM keychains")).rows;
+    return result;
+}
+
+async function getSkins(category) {
+    let firstLet = category[0].toUpperCase();
+    let newCat = firstLet + category.substring(1);
+    const query = `SELECT * FROM skins WHERE "category.name" = '${newCat}'`;
+    const result = (await db.query(query)).rows;
+    return result;
+}
+async function getMidTier() {
+    const query = `SELECT * FROM skins WHERE "category.name" = 'Heavy' OR "category.name" = 'SMGs'`;
+    const result = (await db.query(query)).rows;
+    return result;
+}
 async function getCollections(){
     const collections = (await db.query("SELECT name from collections")).rows;
     return collections;
+}
+
+async function getItemsByCategory(category){
+    const items = (await db.query("SELECT * FROM " + category)).rows;
+    return items;
 }
 
 app.get("/", (req, res) => {
@@ -148,31 +170,40 @@ app.post("/filter", async (req, res) => {
 
 app.get("/database", async(req, res) => {
     items = await getItems();
-    let itemsLength = items.length;
     collections = await getCollections();
     let collectionsLength = collections.length;
     res.render("database.ejs", {
         items: items,
-        length: itemsLength,
-        collections:collections,
-        collectionsLength:collectionsLength,
-        user: req.user
-    });
-})
-app.get("/database1", async(req, res) => {
-    items = await getItems();
-    let itemsLength = items.length;
-    collections = await getCollections();
-    let collectionsLength = collections.length;
-    res.render("database1.ejs", {
-        items: items,
-        length: itemsLength,
         collections:collections,
         collectionsLength:collectionsLength,
         user: req.user
     });
 })
 
+
+app.get("/database/:category", async (req, res) => {
+    let category = req.params.category; 
+    let items;
+    if(category === "knives" || category === "pistols" || category === "rifles"){
+        items = await getSkins(category);
+    }
+    else if(category === "charms"){
+        items = await getCharms();
+    }
+    else if(category === "mid-tier"){
+        items = await getMidTier();
+    }
+    else{
+        items = await getItemsByCategory(category);
+    }
+
+    res.render("database.ejs", {
+        category: category, 
+        items: items,
+        user: req.user
+    });
+});
+
 app.listen(port, () => {
-    console.log(`ide`);
+    console.log(`duvaj ga`);
 });

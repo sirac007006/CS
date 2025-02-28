@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float Market - Skin Database</title>
+    <style>
+        /* Existing CSS */
+/* Existing CSS */
+:root {
+            --primary: #ffd700;
+            --primary-dark: #ccac00;
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --bg-card: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --border-color: #2a2a2a;
+            --button-primary: #5c2cf1;
+            --nav-bg: #1e1e1e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-darker);
+            color: var(--text-primary);
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            background-color: var(--nav-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .primary-nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .currency-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .sign-in-button {
+            background-color: var(--button-primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .sign-in-button:hover {
+            background-color: #4a23c2;
+            transform: translateY(-1px);
+        }
+
+        .search-container {
+            position: relative;
+            width: 250px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Sub Navigation */
+        .sub-nav {
+            background-color: var(--bg-dark);
+            padding: 0.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .sub-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.4rem 0;
+            transition: color 0.2s;
+        }
+
+        .sub-nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Database Content */
+        .database-content {
+            padding: 2rem;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .content-title {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .search-button {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .search-button:hover {
+            background: var(--bg-dark);
+            border-color: var(--primary);
+        }
+
+        .skins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skin-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .skin-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .skin-info {
+            padding: 1rem;
+        }
+
+        .skin-name {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skin-type {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .skin-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .price-range {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .case-info {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quality-tag {
+            background: var(--button-primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .stat-tag {
+            background: #ff6b00;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        .skin-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: var(--bg-darker);}
+        /* Additional CSS for Modal Popups */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-dark);
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 1rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        /* Filtered Search Modal */
+        .modal-content input[type="text"],
+        .modal-content select {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .modal-content button {
+            background-color: var(--button-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Skin Details Modal */
+        .skin-image-popup {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .skin-details {
+            margin-top: 1rem;
+        }
+
+        .skin-details p {
+            margin-bottom: 0.5rem;
+        }
+    
+        /* Additional CSS for Modal Popups */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-dark);
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 500px;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 1rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .modal-content input[type="text"],
+        .modal-content select {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .modal-content input[type="number"] {
+            width: 48%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            display: inline-block;
+        }
+
+        .modal-content button {
+            background-color: var(--button-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .modal-content label {
+            margin-top: 1rem;
+            display: block;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-dark);
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 1rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        /* Filtered Search Modal */
+        .modal-content input[type="text"],
+        .modal-content select {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .modal-content input[type="number"] {
+            width: 48%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            display: inline-block;
+        }
+
+        .modal-content button {
+            background-color: var(--button-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .modal-content label {
+            margin-top: 1rem;
+            display: block;
+        }
+
+        /* Skin Details Modal Styles */
+        .skin-details-modal {
+            width: 90%;
+            max-width: 1200px;
+            height: 80vh;
+            overflow-y: auto;
+            padding: 25px;
+        }
+
+        .skin-modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 20px;
+            height: 100%;
+        }
+
+        /* Left Section - Sales Graph */
+        .skin-modal-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sales-graph-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            height: 250px;
+            margin-bottom: 20px;
+        }
+
+        .recent-sales-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .recent-sales-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .recent-sales-table th, .recent-sales-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Center Section - Skin Image and Details */
+        .skin-modal-center {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .seller-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .seller-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .seller-name {
+            font-weight: 500;
+        }
+
+        .skin-image-container {
+            background: var(--bg-darker);
+            border-radius: 8px;
+            overflow: hidden;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .skin-image-large {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .skin-details-info {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .float-wear-container {
+            margin-bottom: 20px;
+        }
+
+        .float-value-container {
+            margin-bottom: 10px;
+        }
+
+        .float-bar {
+            height: 10px;
+            background: linear-gradient(to right, #3498db, #2ecc71, #f1c40f, #e67e22, #e74c3c);
+            border-radius: 5px;
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .float-indicator {
+            position: absolute;
+            width: 4px;
+            height: 16px;
+            background-color: white;
+            top: -3px;
+            border-radius: 2px;
+        }
+
+        .float-ranges, .float-categories {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .pattern-container {
+            margin-top: 10px;
+        }
+
+        .stickers-container {
+            margin-bottom: 20px;
+        }
+
+        .stickers-grid {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .sticker-item {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-darker);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .sticker-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .buy-now-btn, .add-cart-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 4px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .buy-now-btn {
+            background-color: var(--button-primary);
+            color: white;
+        }
+
+        .add-cart-btn {
+            background-color: var(--bg-dark);
+            border: 1px solid var(--button-primary);
+            color: var(--text-primary);
+        }
+
+        /* Right Section - Buy Orders */
+        .skin-modal-right {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .buy-orders-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .buy-orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .buy-orders-table th, .buy-orders-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main Navigation -->
+    <nav class="top-nav">
+        <div class="primary-nav">
+            <a href="/" class="logo">Float Market</a>
+            <div class="nav-links">
+                <a href="/market">Market</a>
+                <a href="/database" class="active">Database</a>
+            </div>
+        </div>
+        <div class="top-nav-right">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search...">
+            </div>
+            <select class="currency-select">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+            </select>
+            <a href="/auth/steam" class="sign-in-button">Sign in with Steam</a>
+        </div>
+    </nav>
+
+    <!-- Sub Navigation -->
+    <div class="sub-nav">
+        <a href="/agents">Agents</a>
+        <a href="/collections">Collections</a>
+        <a href="/cases">Cases</a>
+        <a href="/graffiti">Graffiti</a>
+        <a href="/charms">Charms</a>
+        <a href="/keys">Keys</a>
+        <a href="/music_kits">Music Kits</a>
+        <a href="/patches">Patches</a>
+        <a href="/pistols">Pistols</a>
+        <a href="/mid-tier">Mid-Tier</a>
+        <a href="/rifles">Rifles</a>
+        <a href="/sticker">Sticker</a>
+    </div>
+
+    <div class="database-content">
+        <div class="content-header">
+            <h2 class="content-title">Browse and buy all CS2 & CS:GO skins</h2>
+            <button class="search-button" id="openSearchModal">Filtered Search</button>
+        </div>
+
+        <div class="skins-grid">
+            <div class="skin-card" data-skin-name="Bayonet | Doppler" data-price-range="$632.99 - $651.86" data-skin-type="Covert Knife" data-case-info="3 containers">
+                <img src="/api/placeholder/280/200" alt="Bayonet Doppler" class="skin-image">
+                <div class="skin-info">
+                    <span class="quality-tag">Covert Knife</span>
+                    <span class="stat-tag">StatTrak™ Available</span>
+                    <h3 class="skin-name">Bayonet | Doppler</h3>
+                    <p class="skin-type">Factory New</p>
+                    <div class="skin-price">
+                        <span class="price-range">$632.99 - $651.86</span>
+                        <span class="case-info">3 containers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="skinDetailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" id="closeSkinModal">&times;</span>
+    
+                <div class="skin-modal-container">
+                    <!-- Seller Profile -->
+                    <div class="seller-profile">
+                        <img id="sellerProfilePic" src="/api/placeholder/100/100" alt="Seller Profile">
+                    </div>
+    
+                    <!-- Main Skin Image -->
+                    <div class="skin-info-section">
+                        <img id="skinImage" src="" alt="Skin Image">
+                        <p id="patternWear">Pattern Wear: -</p>
+                        <p id="floatValue">Float: -</p>
+                        <div class="sticker-images">
+                            <img src="/api/placeholder/50/50" alt="Sticker">
+                            <img src="/api/placeholder/50/50" alt="Sticker">
+                            <img src="/api/placeholder/50/50" alt="Sticker">
+                        </div>
+                    </div>
+    
+                    <!-- Buttons -->
+                    <div class="modal-buttons">
+                        <button id="buyNow">Buy Now</button>
+                        <button id="addToCart">Add to Cart</button>
+                    </div>
+    
+                    <!-- Sales Graph -->
+                    <div class="sales-section">
+                        <h3>Sales History</h3>
+                        <canvas id="salesGraph"></canvas>
+                    </div>
+    
+                    <!-- Previous Sales -->
+                    <div class="previous-sales">
+                        <h3>Previous Sales</h3>
+                        <div class="sales-list">
+                            <p>$600 - 2 days ago</p>
+                            <p>$620 - 5 days ago</p>
+                            <p>$640 - 7 days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtered Search Modal -->
+    <div id="searchModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSearchModal">&times;</span>
+            <h2>Filtered Search</h2>
+
+            <!-- Min/Max Price -->
+            <label for="minPrice">Price Range</label>
+            <input type="number" id="minPrice" placeholder="Min Price">
+            <input type="number" id="maxPrice" placeholder="Max Price">
+
+            <!-- Weapon Filter -->
+            <label for="weaponFilter">Weapon</label>
+            <select id="weaponFilter">
+                <option value="">Select Weapon</option>
+                <option value="Glock-18">Glock-18</option>
+                <option value="USP-S">USP-S</option>
+                <option value="P2000">P2000</option>
+                <option value="Desert Eagle">Desert Eagle</option>
+                <option value="R8 Revolver">R8 Revolver</option>
+                <option value="Dual Berettas">Dual Berettas</option>
+                <option value="P250">P250</option>
+                <option value="Tec-9">Tec-9</option>
+                <option value="CZ75-Auto">CZ75-Auto</option>
+                <option value="Five-SeveN">Five-SeveN</option>
+                <option value="Nova">Nova</option>
+                <option value="XM1014">XM1014</option>
+                <option value="MAG-7">MAG-7</option>
+                <option value="Sawed-Off">Sawed-Off</option>
+                <option value="MAC-10">MAC-10</option>
+                <option value="MP9">MP9</option>
+                <option value="AK-47">AK-47</option>
+                <option value="M4A4">M4A4</option>
+                <option value="M4A1-S">M4A1-S</option>
+                <option value="FAMAS">FAMAS</option>
+                <option value="Galil AR">Galil AR</option>
+                <option value="SG 553">SG 553</option>
+                <option value="AUG">AUG</option>
+                <option value="SSG 08 (Scout)">SSG 08 (Scout)</option>
+                <option value="AWP">AWP</option>
+                <option value="G3SG1">G3SG1</option>
+                <option value="SCAR-20">SCAR-20</option>
+                <option value="MP7">MP7</option>
+                <option value="PP-Bizon">PP-Bizon</option>
+                <option value="UMP-45">UMP-45</option>
+                <option value="P90">P90</option>
+                <option value="MP5-SD">MP5-SD</option>
+                <option value="M249">M249</option>
+                <option value="Negev">Negev</option>
+                <option value="Default Knife">Default Knife</option>
+                <!-- Add the knife options similarly -->
+                <option value="Bayonet">Bayonet</option>
+                <option value="Karambit">Karambit</option>
+                <!-- ... More weapons and knives -->
+            </select>
+
+            <!-- Rarity Filter -->
+            <label for="rarityFilter">Rarity</label>
+            <select id="rarityFilter">
+                <option value="">Select Rarity</option>
+                <option value="Consumer Grade">Consumer Grade</option>
+                <option value="Industrial Grade">Industrial Grade</option>
+                <option value="Mil-Spec">Mil-Spec</option>
+                <option value="Restricted">Restricted</option>
+                <option value="Classified">Classified</option>
+                <option value="Covert">Covert</option>
+                <option value="Exceedingly Rare">Exceedingly Rare</option>
+                <option value="Contraband">Contraband</option>
+            </select>
+
+            <!-- Unboxable Filter -->
+            <label for="unboxableFilter">Unboxable</label>
+            <select id="unboxableFilter">
+                <option value="">Select Option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <!-- Collection Filter -->
+            <label for="collectionFilter">Collection</label>
+            <select id="collectionFilter">
+                <option value="">Select Collection</option>
+                <!-- Add CS2 collections here -->
+            </select>
+
+            <!-- StatTrak/Souvenir Filter -->
+            <label for="typeFilter">StatTrak/Souvenir</label>
+            <select id="typeFilter">
+                <option value="">Select Type</option>
+                <option value="StatTrak">StatTrak</option>
+                <option value="Non-StatTrak">Non-StatTrak</option>
+                <option value="Souvenir">Souvenir</option>
+                <option value="Non-Souvenir">Non-Souvenir</option>
+            </select>
+
+            <!-- Submit Button -->
+            <button type="button" id="applyFilters">Apply Filters</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for Modal Behavior
+        const searchModal = document.getElementById('searchModal');
+        const openSearchModal = document.getElementById('openSearchModal');
+        const closeSearchModal = document.getElementById('closeSearchModal');
+        const modal = document.getElementById("skinDetailsModal");
+        const closeModal = document.getElementById("closeSkinModal");
+        const skinImage = document.getElementById("skinImage");
+        const patternWear = document.getElementById("patternWear");
+        const floatValue = document.getElementById("floatValue");
+
+        openSearchModal.onclick = function () {
+            searchModal.style.display = 'flex';
+        };
+
+        closeSearchModal.onclick = function () {
+            searchModal.style.display = 'none';
+        };
+
+        window.onclick = function (event) {
+            if (event.target == searchModal) {
+                searchModal.style.display = 'none';
+            }
+        };
+        document.querySelectorAll(".skin-card").forEach(card => {
+            card.addEventListener("click", () => {
+                const skinName = card.getAttribute("data-skin-name");
+                const skinPrice = card.getAttribute("data-price");
+                const skinImg = card.getAttribute("data-skin-image");
+
+                // Fill modal with data
+                skinImage.src = skinImg;
+                patternWear.textContent = `Pattern Wear: ${(Math.random() * 1).toFixed(3)}`;
+                floatValue.textContent = `Float: ${(Math.random() * 1).toFixed(5)}`;
+
+                // Show modal
+                modal.style.display = "block";
+
+                // Generate sales graph
+                generateSalesGraph();
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // Close modal on click outside
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // Generate random sales data for graph
+        function generateSalesGraph() {
+            const ctx = document.getElementById("salesGraph").getContext("2d");
+            new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: ["1 week ago", "5 days ago", "3 days ago", "1 day ago", "Today"],
+                    datasets: [{
+                        label: "Price ($)",
+                        data: [
+                            Math.floor(Math.random() * 100) + 500,
+                            Math.floor(Math.random() * 100) + 550,
+                            Math.floor(Math.random() * 100) + 600,
+                            Math.floor(Math.random() * 100) + 650,
+                            Math.floor(Math.random() * 100) + 700
+                        ],
+                        borderColor: "blue",
+                        borderWidth: 2
+                    }]
+                }
+            });
+        }
+
+        // Additional functionality like applying filters can be added here
+    </script>
+</body>
+
+</html>

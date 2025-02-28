@@ -8,17 +8,23 @@
 </head>
 <body>
     <nav class="top-nav">
+        <a href="/" class="logo">Float Market</a>
         <div class="nav-links">
-            <a href="/" class="logo">FLOAT MARKET</a>
-            <a href="/market" class="active">Market</a>
+            <a href="/market">Market</a>
             <a href="/database">Database</a>
         </div>
         <div class="top-nav-right">
-            <form class="user-form">
-                <span class="balance">1337.00 €</span>
-                <a href="/cart">Cart (0)</a>
-                <a href="/profile">Profile</a>
-            </form>
+            <select class="currency-select">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+            </select>
+            <% if (!user) { %>
+                <a class="sign-in-button" href="/auth/steam">Sign in with Steam</a>
+            <% } else { %>
+                <a href="/profile">Welcome, <%= user.displayName %></a> |
+                <a href="/logout">Logout</a>
+            <% } %>
         </div>
     </nav>
 
