@@ -11,7 +11,7 @@ import dotenv from "dotenv";
 dotenv.config(); // Učitavanje .env fajla
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const db = new pg.Client({
     user: "postgres",
@@ -51,7 +51,7 @@ passport.deserializeUser((obj, done) => {
 // Steam strategija
 passport.use(new SteamStrategy.Strategy({
     returnURL: process.env.CALLBACK_URL,
-    realm: "http://localhost:3000/",
+    realm: port,
     apiKey: process.env.STEAM_API_KEY
 }, (identifier, profile, done) => {
     profile.identifier = identifier;
