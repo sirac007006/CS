@@ -125,6 +125,10 @@ async function getItemsByCategory(category){
     const items = (await db.query("SELECT * FROM " + category)).rows;
     return items;
 }
+async function getWeaponCategory(){
+    const wCategories = (await db.query('SELECT DISTINCT "weapon.name" FROM skins')).rows;
+    return wCategories;
+}
 
 app.get("/", (req, res) => {
     res.render("homepage.ejs", { user: req.user });
@@ -171,12 +175,12 @@ app.post("/filter", async (req, res) => {
 app.get("/database", async(req, res) => {
     items = await getItems();
     collections = await getCollections();
-    let collectionsLength = collections.length;
+    let wCategories = await getWeaponCategory();
     res.render("database.ejs", {
         items: items,
         collections:collections,
-        collectionsLength:collectionsLength,
-        user: req.user
+        user: req.user,
+        wCategories: wCategories,
     });
 })
 
@@ -184,6 +188,8 @@ app.get("/database", async(req, res) => {
 app.get("/database/:category", async (req, res) => {
     let category = req.params.category; 
     let items;
+    let collections = await getCollections();
+    let wCategories = await getWeaponCategory();
     if(category === "knives" || category === "pistols" || category === "rifles"){
         items = await getSkins(category);
     }
@@ -196,13 +202,26 @@ app.get("/database/:category", async (req, res) => {
     else{
         items = await getItemsByCategory(category);
     }
-
     res.render("database.ejs", {
         category: category, 
         items: items,
-        user: req.user
+        user: req.user,
+        collections:collections,
+        wCategories: wCategories
     });
 });
+
+app.post("/filterDatabase", async(req, res) => {
+    let minPrice = req.body.minPrice;
+    let maxPrice = req.body.maxPrice;
+    let weapon = req.body.weapon;
+    let rarity = req.body.rarity;
+    let boxable = req.body.boxable;
+    let collection = req.body.collection;
+    let tag = req.body.tag;
+    console.log(minPrice, maxPrice, weapon, rarity, boxable, collection, tag);
+
+})
 
 app.listen(port, () => {
     console.log(`duvaj ga`);

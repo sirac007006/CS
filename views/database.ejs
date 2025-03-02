@@ -176,6 +176,7 @@
     </div>
 
     <!-- Filtered Search Modal -->
+    <form method="POST" action="/filterDatabase">
     <div id="searchModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" id="closeSearchModal">&times;</span>
@@ -183,57 +184,21 @@
 
             <!-- Min/Max Price -->
             <label for="minPrice">Price Range</label>
-            <input type="number" id="minPrice" placeholder="Min Price">
-            <input type="number" id="maxPrice" placeholder="Max Price">
+            <input type="number" id="minPrice" placeholder="Min Price" name="minPrice">
+            <input type="number" id="maxPrice" placeholder="Max Price" name="maxPrice">
 
             <!-- Weapon Filter -->
             <label for="weaponFilter">Weapon</label>
-            <select id="weaponFilter">
+            <select id="weaponFilter" name="weapon">
                 <option value="">Select Weapon</option>
-                <option value="Glock-18">Glock-18</option>
-                <option value="USP-S">USP-S</option>
-                <option value="P2000">P2000</option>
-                <option value="Desert Eagle">Desert Eagle</option>
-                <option value="R8 Revolver">R8 Revolver</option>
-                <option value="Dual Berettas">Dual Berettas</option>
-                <option value="P250">P250</option>
-                <option value="Tec-9">Tec-9</option>
-                <option value="CZ75-Auto">CZ75-Auto</option>
-                <option value="Five-SeveN">Five-SeveN</option>
-                <option value="Nova">Nova</option>
-                <option value="XM1014">XM1014</option>
-                <option value="MAG-7">MAG-7</option>
-                <option value="Sawed-Off">Sawed-Off</option>
-                <option value="MAC-10">MAC-10</option>
-                <option value="MP9">MP9</option>
-                <option value="AK-47">AK-47</option>
-                <option value="M4A4">M4A4</option>
-                <option value="M4A1-S">M4A1-S</option>
-                <option value="FAMAS">FAMAS</option>
-                <option value="Galil AR">Galil AR</option>
-                <option value="SG 553">SG 553</option>
-                <option value="AUG">AUG</option>
-                <option value="SSG 08 (Scout)">SSG 08 (Scout)</option>
-                <option value="AWP">AWP</option>
-                <option value="G3SG1">G3SG1</option>
-                <option value="SCAR-20">SCAR-20</option>
-                <option value="MP7">MP7</option>
-                <option value="PP-Bizon">PP-Bizon</option>
-                <option value="UMP-45">UMP-45</option>
-                <option value="P90">P90</option>
-                <option value="MP5-SD">MP5-SD</option>
-                <option value="M249">M249</option>
-                <option value="Negev">Negev</option>
-                <option value="Default Knife">Default Knife</option>
-                <!-- Add the knife options similarly -->
-                <option value="Bayonet">Bayonet</option>
-                <option value="Karambit">Karambit</option>
-                <!-- ... More weapons and knives -->
+                <%for(let i = 0; i<wCategories.length; i++){%>
+                    <option value="<%=wCategories[i]["weapon.name"]%>"><%=wCategories[i]["weapon.name"]%></option>
+                <%}%>
             </select>
 
             <!-- Rarity Filter -->
             <label for="rarityFilter">Rarity</label>
-            <select id="rarityFilter">
+            <select id="rarityFilter" name="rarity">
                 <option value="">Select Rarity</option>
                 <option value="Consumer Grade">Consumer Grade</option>
                 <option value="Industrial Grade">Industrial Grade</option>
@@ -247,7 +212,7 @@
 
             <!-- Unboxable Filter -->
             <label for="unboxableFilter">Unboxable</label>
-            <select id="unboxableFilter">
+            <select id="unboxableFilter" name="boxable">
                 <option value="">Select Option</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -255,14 +220,16 @@
 
             <!-- Collection Filter -->
             <label for="collectionFilter">Collection</label>
-            <select id="collectionFilter">
+            <select id="collectionFilter" name="collection">
                 <option value="">Select Collection</option>
-                <!-- Add CS2 collections here -->
+                <%for(let i = 0; i<collections.length; i++){%>
+                    <option value="<%=collections[i].name%>"><%=collections[i].name%></option>
+                <%}%>
             </select>
 
             <!-- StatTrak/Souvenir Filter -->
             <label for="typeFilter">StatTrak/Souvenir</label>
-            <select id="typeFilter">
+            <select id="typeFilter" name="tag">
                 <option value="">Select Type</option>
                 <option value="StatTrak">StatTrak</option>
                 <option value="Non-StatTrak">Non-StatTrak</option>
@@ -271,9 +238,10 @@
             </select>
 
             <!-- Submit Button -->
-            <button type="button" id="applyFilters">Apply Filters</button>
+            <button type="submit" id="applyFilters" >Apply Filters</button>
         </div>
     </div>
+    </form>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".skin-card").forEach((card) => {
@@ -300,6 +268,29 @@
                 });
             });
         });
+        document.addEventListener("DOMContentLoaded", function () {
+        const searchModal = document.getElementById("searchModal");
+        const openSearchModalBtn = document.getElementById("openSearchModal");
+        const closeSearchModalBtn = document.getElementById("closeSearchModal");
+
+        // Otvaranje modala
+        openSearchModalBtn.addEventListener("click", () => {
+            searchModal.style.display = "flex"; // Koristi "flex" ako koristiš flexbox
+        });
+
+        // Zatvaranje modala
+        closeSearchModalBtn.addEventListener("click", () => {
+            searchModal.style.display = "none";
+        });
+
+        // Zatvaranje klikom izvan modala
+        window.addEventListener("click", (event) => {
+            if (event.target === searchModal) {
+                searchModal.style.display = "none";
+            }
+        });
+    });
+
         </script>
     
 </body>
