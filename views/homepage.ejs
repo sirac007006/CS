@@ -21,35 +21,24 @@
             --text-primary: #ffffff;
             --text-secondary: #9ca3af;
             --border-color: #2a2a2a;
-            --button-primary: #0066ff;
+            --button-primary: #5c2cf1;
             --gradient-start: #1a1a1a;
             --gradient-end: #0f0f18;
+            --footer-bg: #111111;
         }
 
         body {
             background-color: var(--bg-darker);
             color: var(--text-primary);
             min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        .top-nav {
-            background-color: rgba(15, 15, 24, 0.95);
-            padding: 1rem 2rem;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
+            flex-direction: column;
         }
 
-        .nav-links {
+        /* Main Navigation */
+        .top-nav {
+            background-color: #1e1e1e;
+            padding: 1rem 2rem;
             display: flex;
             align-items: center;
             gap: 2rem;
@@ -60,31 +49,19 @@
             font-size: 1.5rem;
             font-weight: bold;
             text-decoration: none;
-            margin-right: 2rem;
-            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         .nav-links a {
             color: var(--text-primary);
             text-decoration: none;
             font-size: 1rem;
-            transition: color 0.2s;
-            position: relative;
-        }
-
-        .nav-links a:not(.logo)::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.2s;
-        }
-
-        .nav-links a:not(.logo):hover::after {
-            width: 100%;
         }
 
         .nav-links a:hover {
@@ -95,6 +72,7 @@
             display: flex;
             align-items: center;
             gap: 1.5rem;
+            margin-left: auto;
         }
 
         .currency-select {
@@ -104,15 +82,10 @@
             padding: 0.5rem;
             border-radius: 4px;
             cursor: pointer;
-            transition: border-color 0.2s;
-        }
-
-        .currency-select:hover {
-            border-color: var(--primary);
         }
 
         .sign-in-button {
-            background-color: #5c2cf1;
+            background-color: var(--button-primary);
             color: white;
             padding: 0.5rem 1.5rem;
             border-radius: 4px;
@@ -129,22 +102,7 @@
             transform: translateY(-1px);
         }
 
-        .steam-icon {
-            width: 24px;
-            height: 24px;
-        }
-        .skin-showcase img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 8px 24px rgba(92, 44, 241, 0.2));
-            transition: transform 0.3s ease;
-        }
-
-        .skin-showcase img:hover {
-            transform: scale(1.05);
-        }
-
+        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
             position: relative;
@@ -153,6 +111,7 @@
             align-items: center;
             padding: 6rem 2rem;
             overflow: hidden;
+            flex: 1;
         }
 
         .hero::before {
@@ -240,7 +199,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            perspective: 1000px;
         }
 
         .skin-showcase {
@@ -266,14 +224,6 @@
             transform: rotate(3deg) translateY(20px);
         }
 
-        .knife-fade {
-            position: absolute;
-            bottom: 50px;
-            right: 0;
-            width: 60%;
-            transform: rotate(10deg);
-        }
-
         .skin-label {
             position: absolute;
             left: 20px;
@@ -297,6 +247,71 @@
             border-radius: 50%;
         }
 
+        /* Footer Styles */
+        .footer {
+            background-color: var(--footer-bg);
+            padding: 2rem 4rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .social-links a:hover {
+            color: var(--text-primary);
+        }
+
         @media (max-width: 1024px) {
             .hero-content {
                 grid-template-columns: 1fr;
@@ -313,6 +328,10 @@
 
             .hero-skins {
                 height: 400px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -336,13 +355,28 @@
             .hero-skins {
                 height: 300px;
             }
+
+            .footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Main Navigation -->
     <nav class="top-nav">
+        <a href="/" class="logo">Float Market</a>
         <div class="nav-links">
-            <a href="/" class="logo">FLOAT MARKET</a>
             <a href="/market">Market</a>
             <a href="/database">Database</a>
         </div>
@@ -353,15 +387,15 @@
                 <option value="GBP">GBP</option>
             </select>
             <% if (!user) { %>
-                <a href="/auth/steam">Sign in with Steam</a>
+                <a class="sign-in-button" href="/auth/steam">Sign in with Steam</a>
             <% } else { %>
                 <a href="/profile">Welcome, <%= user.displayName %></a> |
                 <a href="/logout">Logout</a>
             <% } %>
-            
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <main class="hero">
         <div class="hero-content">
             <div class="hero-text">
@@ -390,20 +424,56 @@
             
             <div class="hero-skins">
                 <div class="skin-showcase ak47-neon">
-                    <img src="path-to-m4a4-gold-image.png" alt="AK-47 Neon" class="skin-image">
+                    <img src="C:\Users\jakov\OneDrive\Radna površina\CS2\public\path-to-knife-image.jpg" alt="AK-47 Neon">
+                    <div class="skin-label">
+                        <span>AK-47 Neon</span>
+                    </div>
                 </div>
                 <div class="skin-showcase m4a1-golden">
-                    <img src="path-to-m4a4-gold-image.png" alt="M4A1 Golden" class="skin-image">
-                </div>
-                <div class="skin-label">
-                    <span>AK-47 Neon</span>
-                </div>
-                <div class="skin-label" style="bottom: -30px; left: 20px;">
-                    <span>M4A1 Golden</span>
+                    <img src="C:\Users\jakov\OneDrive\Radna površina\CS2\public\path-to-m4a4-gold-image.png" alt="M4A1 Golden">
+                    <div class="skin-label">
+                        <span>M4A1 Golden</span>
+                    </div>
                 </div>
             </div>
-            
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Products</h3>
+                <ul class="footer-links">
+                    <li><a href="/market">Market</a></li>
+                    <li><a href="/database">Database</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Socials</h3>
+                <ul class="footer-links">
+                    <li><a href="">Discord Server</a></li>
+                    <li><a href="">Steam Group</a></li>
+                    <li><a href="">X</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© market Inc.</p>
+        </div>
+    </footer>
 </body>
 </html>

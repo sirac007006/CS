@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float Market - Skin Database</title>
+    <link href="/database.css" rel="stylesheet">
+</head>
+
+<body data-category="<%= category %>">
+    <nav class="top-nav">
+        <a href="/" class="logo">Float Market</a>
+        <div class="nav-links">
+            <a href="/market">Market</a>
+            <a href="/database">Database</a>
+        </div>
+        <div class="top-nav-right">
+            <div class="filter-section">
+                <input type="text" name="search" class="search-input" placeholder="Search items...">
+            </div>
+
+            <select class="currency-select">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+            </select>
+            <% if (!user) { %>
+                <a class="sign-in-button" href="/auth/steam">Sign in with Steam</a>
+            <% } else { %>
+                <a href="/profile">Welcome, <%= user.displayName %></a> |
+                <a href="/logout">Logout</a>
+            <% } %>
+        </div>
+    </nav>
+
+    <!-- Sub Navigation -->
+    <div class="sub-nav">
+        <a href="/database/agents">Agents</a>
+        <a href="/database/cases">Cases</a>
+        <a href="/database/charms">Charms</a>
+        <a href="/database/collections">Collections</a>
+        <a href="/database/graffiti">Graffiti</a>
+        <a href="/database/keys">Keys</a>
+        <a href="/database/knives">Knives</a>
+        <a href="/database/music_kits">Music Kits</a>
+        <a href="/database/patches">Patches</a>
+        <a href="/database/pistols">Pistols</a>
+        <a href="/database/mid-tier">Mid-Tier</a>
+        <a href="/database/rifles">Rifles</a>
+        <a href="/database/stickers">Stickers</a>
+    </div>
+
+    <div class="database-content">
+        <div class="content-header">
+            <h2 class="content-title">Browse and buy all CS2 & CS:GO skins</h2>
+            <button class="search-button" id="openSearchModal">Filtered Search</button>
+        </div>
+        <div class="skins-grid">
+            <% if (items && items.length > 0) { %>
+                <% for(let i = 0; i < items.length; i++) { %> 
+                    <div class="skin-card" 
+                        data-index="<%= i %>"
+                        data-skin-name="<%= items[i].name%>" 
+                        data-price-range="<%= items[i].min_float%> - <%= items[i].max_float%>" 
+                        data-skin-type="<%= items[i]['category.name'] %>" 
+                        data-case-info="<%= items[i]['pattern.name'] %>"
+                        data-skin-description="<%= items[i].description %>"
+                        data-case-rarity="<%= items[i]['rarity.name'] %>">
+            
+                        <img src="<%= items[i].image %>" alt="<%= items[i].name || 'Unknown Skin' %>" class="skin-image" loading="lazy">
+                   
+                        <div class="skin-info">
+                            <span class="quality-tag" style="background-color: <%= items[i]['rarity.color'] %>">
+                                <%= items[i]['rarity.name'] %>
+                            </span>                            
+                            <% if (items[i].stattrak === true) { %>
+                                <span class="stat-tag">StatTrak™ Available</span>
+                            <% } %>
+                            <% if (items[i].souvenir === true) { %>
+                                <span class="suv-tag">Souvenir™ Available</span>
+                            <% } %>
+                            <h3 class="skin-name"><%= items[i].name %></h3>
+                            <p class="skin-type"><%= items[i]['category.name'] %></p>
+                            <div class="skin-price">
+                                <span class="price-range"><%= items[i].min_float %> - <%= items[i].max_float %></span>
+                                <span class="case-info"><%= items[i]['pattern.name'] %></span>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Modal za svaki skin -->
+                    <div id="skinDetailsModal-<%= i %>" class="modal" style="display: none;">
+                        <div class="modal-content skin-details-modal">
+                            <span class="close-modal" id="closeSkinModal-<%= i %>">&times;</span>
+                            
+                            <div class="skin-modal-grid">
+                                <!-- Leva sekcija - Informacije -->
+                                <div class="skin-modal-left">
+                                    <div class="recent-sales-container">
+                                        <h3>Information</h3>
+                                        <table class="recent-sales-table">
+                                            <tbody>
+                                                <tr><td>Category</td><td><%= items[i]['category.name'] %></td></tr>
+                                                <tr><td>Weapon</td><td><%= items[i].name %></td></tr>
+                                                <tr><td>Pattern</td><td><%= items[i]['pattern.name'] %></td></tr>
+                                                <tr><td>Minimum float</td><td><%= items[i].min_float %></td></tr>
+                                                <tr><td>Maximum float</td><td><%= items[i].max_float %></td></tr>
+                                                <tr><td>Rarity</td><td><%= items[i]['rarity.name'] %></td></tr>
+                                                <% if (items[i]["wears"] && Array.isArray(items[i]["wears"]) && items[i]["wears"].length > 0) { %>
+                                                    <% for(let k = 0; k < items[i]["wears"].length; k++) { %>
+                                                        <tr><td><%= k === 0 ? "Wears" : "" %></td><td><%= items[i]["wears"][k].name %></td></tr>
+                                                    <% } %>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+            
+                                <!-- Srednja sekcija - Slika i float range -->
+                                <div class="skin-modal-center">
+                                    <div class="skin-image-container">
+                                        <img src="<%= items[i].image %>" class="skin-image-large"  loading="lazy">
+                                    </div>
+                                    
+                                    <div class="skin-details-info">
+                                        <h2><%= items[i].name %></h2>
+                                        <div class="float-wear-container">
+                                            <h4>Float Range: <%= items[i].min_float %> - <%= items[i].max_float %></h4>
+                                            <div class="float-value-container">
+                                                <div class="float-bar">
+                                                    <div class="float-indicator" style="left: <%= (items[i].min_float * 100).toFixed(2) %>%"></div>
+                                                    <div class="float-indicator" style="left: <%= (items[i].max_float * 100).toFixed(2) %>%"></div>
+                                                </div>
+                                                <div class="float-ranges">
+                                                    <span>0.00</span><span>0.07</span><span>0.15</span>
+                                                    <span>0.38</span><span>0.45</span><span>1.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="pattern-container">
+                                            <h4>Description</h4>
+                                            <p><%= items[i].description %></p>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <!-- Desna sekcija - Buy orders -->
+                                <div class="skin-modal-right">
+                                    <div class="buy-orders-container">
+                                        <h3>Active Buy Orders</h3>
+                                        <table class="buy-orders-table">
+                                            <thead>
+                                                <tr><th>Buyer</th><th>Float Range</th><th>Price</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td>Trader01</td><td>0.00 - 0.01</td><td>$649.99</td></tr>
+                                                <tr><td>SkinCollector</td><td>0.00 - 0.03</td><td>$635.50</td></tr>
+                                                <tr><td>CS2Player</td><td>Any</td><td>$620.00</td></tr>
+                                                <tr><td>KnifeEnthusiast</td><td>0.00 - 0.02</td><td>$645.75</td></tr>
+                                                <tr><td>FloatHunter</td><td>0.00 - 0.01</td><td>$655.00</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+            
+                <% } %>
+            <% } else { %>
+                <p>No items found.</p>
+            <% } %>
+            
+        </div>
+
+
+    </div>
+
+    <!-- Filtered Search Modal -->
+    <form method="POST" action="/filterDatabase">
+    <div id="searchModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSearchModal">&times;</span>
+            <h2>Filtered Search</h2>
+
+            <!-- Min/Max Price -->
+            <label for="minPrice">Price Range</label>
+            <input type="number" id="minPrice" placeholder="Min Price" name="minPrice" min=0>
+            <input type="number" id="maxPrice" placeholder="Max Price" name="maxPrice"min=0>
+
+            <label for="Type">Type</label>
+            <select id="Type" name="type" required>
+                <option value="">Select Option</option>
+                <option value="agents">Agents</option>
+                <option value="crates">Cases</option>
+                <option value="keychains">Charms</option>
+                <option value="collections">Collections</option>
+                <option value="graffiti">Graffiti</option>
+                <option value="keys">Keys</option>
+                <option value="music_kits">Music Kits</option>
+                <option value="patches">Patches</option>
+                <option value="skins">Skins</option>
+                <option value="stickers">Stickers</option>
+            </select>
+            
+
+            <label for="weaponFilter">Weapon</label>
+            <select id="weaponFilter" name="weapon">
+                <option value="">Select Weapon</option>
+                <%for(let i = 0; i<wCategories.length; i++){%>
+                    <option value="<%=wCategories[i]["weapon.name"]%>"><%=wCategories[i]["weapon.name"]%></option>
+                <%}%>
+            </select>
+
+            <!-- Rarity Filter -->
+            <label for="rarityFilter">Rarity</label>
+            <select id="rarityFilter" name="rarity">
+                <option value="">Select Rarity</option>
+                <option value="Consumer Grade">Consumer Grade</option>
+                <option value="Industrial Grade">Industrial Grade</option>
+                <option value="Mil-Spec">Mil-Spec</option>
+                <option value="Restricted">Restricted</option>
+                <option value="Classified">Classified</option>
+                <option value="Covert">Covert</option>
+                <option value="Exceedingly Rare">Exceedingly Rare</option>
+                <option value="Contraband">Contraband</option>
+            </select>
+
+            <label for="collectionFilter">Collection</label>
+            <select id="collectionFilter" name="collection">
+                <option value="">Select Collection</option>
+                <%for(let i = 0; i<collections.length; i++){%>
+                    <option value="<%=collections[i].name%>"><%=collections[i].name%></option>
+                <%}%>
+            </select>
+
+            <!-- StatTrak/Souvenir Filter -->
+            <label for="typeFilter">StatTrak/Souvenir</label>
+            <select id="typeFilter" name="tag">
+                <option value="">Select Type</option>
+                <option value="StatTrak">StatTrak</option>
+                <option value="Normal">Normal</option>
+                <option value="Souvenir">Souvenir</option>
+            </select>
+
+            <!-- Submit Button -->
+            <button type="submit" id="applyFilters" >Apply Filters</button>
+        </div>
+    </div>
+    </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Modal za skinove
+            document.querySelectorAll(".skin-card").forEach((card) => {
+                card.addEventListener("click", () => {
+                    let index = card.getAttribute("data-index");
+                    let modal = document.getElementById(`skinDetailsModal-${index}`);
+                    if (modal) {
+                        modal.style.display = "flex";
+                    }
+                });
+            });
+    
+            document.querySelectorAll(".close-modal").forEach((closeBtn) => {
+                closeBtn.addEventListener("click", () => {
+                    let index = closeBtn.id.replace("closeSkinModal-", "");
+                    let modal = document.getElementById(`skinDetailsModal-${index}`);
+                    if (modal) {
+                        modal.style.display = "none";
+                    }
+                });
+            });
+    
+            // Zatvaranje modala klikom izvan njega
+            window.addEventListener("click", (event) => {
+                document.querySelectorAll(".modal").forEach((modal) => {
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                    }
+                });
+            });
+            
+    
+            // Modal za pretragu
+            const searchModal = document.getElementById("searchModal");
+            const openSearchModalBtn = document.getElementById("openSearchModal");
+            const closeSearchModalBtn = document.getElementById("closeSearchModal");
+    
+            if (openSearchModalBtn && searchModal) {
+                openSearchModalBtn.addEventListener("click", () => {
+                    searchModal.style.display = "flex";
+                });
+    
+                closeSearchModalBtn.addEventListener("click", () => {
+                    searchModal.style.display = "none";
+                });
+    
+                window.addEventListener("click", (event) => {
+                    if (event.target === searchModal) {
+                        searchModal.style.display = "none";
+                    }
+                });
+            }
+    
+            // Pretraga i filtriranje
+            const searchInput = document.querySelector(".search-input");
+            const collectionSelect = document.querySelector(".collection-select");
+    
+            function sendFilterRequest() {
+                if (!searchInput) return;
+    
+                const query = searchInput.value;
+                const category = document.body.getAttribute("data-category");
+    
+                fetch("/filter", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ search: query, category: category }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Response from server:", data);
+                        updateItemsGrid(data.items);
+                    })
+                    .catch(error => console.error("Error:", error));
+            }
+    
+            if (searchInput) {
+                searchInput.addEventListener("input", sendFilterRequest);
+            }
+    
+            if (collectionSelect) {
+                collectionSelect.addEventListener("change", sendFilterRequest);
+            }
+    
+            function updateItemsGrid(items) {
+                const itemsGrid = document.querySelector(".skins-grid");
+                if (!itemsGrid) return;
+    
+                itemsGrid.innerHTML = "";
+    
+                items.forEach((item, i) => {
+                    const itemCard = document.createElement("div");
+                    itemCard.classList.add("skin-card");
+                    itemCard.dataset.index = i;
+                    itemCard.dataset.skinName = item.name;
+                    itemCard.dataset.priceRange = `${item.min_float} - ${item.max_float}`;
+                    itemCard.dataset.skinType = item["category.name"] || "";
+                    itemCard.dataset.caseInfo = item["pattern.name"] || "";
+                    itemCard.dataset.skinDescription = item.description || "";
+                    itemCard.dataset.caseRarity = item["rarity.name"]|| "";
+                    
+                    itemCard.innerHTML = `
+                        <img src="${item.image}" alt="${item.name || 'Unknown Skin'}" class="skin-image" loading="lazy">
+                        <div class="skin-info">
+                            <span class="quality-tag" style="background-color: ${item["rarity.color"] || '#ccc'}">
+                                ${item["rarity.name"] || ''}
+                            </span>
+                            ${item.stattrak ? '<span class="stat-tag">StatTrak™ Available</span>' : ''}
+                            ${item.souvenir ? '<span class="suv-tag">Souvenir™ Available</span>' : ''}
+                            <h3 class="skin-name">${item.name}</h3>
+                            <p class="skin-type">${item["category.name"] || ''}</p>
+                            <div class="skin-price">
+                                <span class="price-range">${item.min_float || '0.00'} - ${item.max_float || ''}</span>
+                                <span class="case-info">${item["pattern.name"] || ''}</span>
+                            </div>
+                        </div>
+                    `;
+                    
+
+    itemsGrid.appendChild(itemCard);
+
+    // Kreiranje modala
+    const modal = document.createElement("div");
+    modal.id = `skinDetailsModal-${i}`;
+    modal.classList.add("modal");
+    modal.style.display = "none";
+
+    modal.innerHTML = `
+        <div class="modal-content skin-details-modal">
+            <span class="close-modal" id="closeSkinModal-${i}">&times;</span>
+            <div class="skin-modal-grid">
+                <div class="skin-modal-left">
+                    <div class="recent-sales-container">
+                        <h3>Information</h3>
+                        <table class="recent-sales-table">
+                            <tbody>
+                                <tr><td>Category</td><td>${item["category.name"] || ''}</td></tr>
+                                <tr><td>Weapon</td><td>${item.name}</td></tr>
+                                <tr><td>Pattern</td><td>${item["pattern.name"] || ''}</td></tr>
+                                <tr><td>Minimum float</td><td>${item.min_float}</td></tr>
+                                <tr><td>Maximum float</td><td>${item.max_float}</td></tr>
+                                <tr><td>Rarity</td><td>${item["rarity.name"] || ''}</td></tr>
+                                ${item.wears?.length ? item.wears.map((wear, k) => `<tr><td>${k === 0 ? "Wears" : ""}</td><td>${wear.name}</td></tr>`).join('') : ''}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="skin-modal-center">
+                    <div class="skin-image-container">
+                        <img src="${item.image}" class="skin-image-large" loading="lazy">
+                    </div>
+                    <div class="skin-details-info">
+                        <h2>${item.name}</h2>
+                        <div class="float-wear-container">
+                            <h4>Float Range: ${item.min_float} - ${item.max_float}</h4>
+                            <div class="float-value-container">
+                                <div class="float-bar">
+                                    <div class="float-indicator" style="left: ${(item.min_float * 100).toFixed(2)}%"></div>
+                                    <div class="float-indicator" style="left: ${(item.max_float * 100).toFixed(2)}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pattern-container">
+                            <h4>Description</h4>
+                            <p>${item.description || ''}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="skin-modal-right">
+                                    <div class="buy-orders-container">
+                                        <h3>Active Buy Orders</h3>
+                                        <table class="buy-orders-table">
+                                            <thead>
+                                                <tr><th>Buyer</th><th>Float Range</th><th>Price</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td>Trader01</td><td>0.00 - 0.01</td><td>$649.99</td></tr>
+                                                <tr><td>SkinCollector</td><td>0.00 - 0.03</td><td>$635.50</td></tr>
+                                                <tr><td>CS2Player</td><td>Any</td><td>$620.00</td></tr>
+                                                <tr><td>KnifeEnthusiast</td><td>0.00 - 0.02</td><td>$645.75</td></tr>
+                                                <tr><td>FloatHunter</td><td>0.00 - 0.01</td><td>$655.00</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    itemCard.addEventListener("click", () => {
+    let modal = document.getElementById(`skinDetailsModal-${i}`);
+    if (modal) {
+        modal.style.display = "flex";
+    }
+    document.querySelectorAll(".close-modal").forEach((closeBtn) => {
+                closeBtn.addEventListener("click", () => {
+                    let index = closeBtn.id.replace("closeSkinModal-", "");
+                    let modal = document.getElementById(`skinDetailsModal-${index}`);
+                    if (modal) {
+                        modal.style.display = "none";
+                    }
+                });
+            });
+});
+
+itemsGrid.appendChild(itemCard);
+
+});
+
+document.addEventListener("click", function (event) {
+    if (event.target.closest(".skin-card")) {
+        let card = event.target.closest(".skin-card");
+        let index = card.getAttribute("data-index");
+        console.log("Kliknuto na skin:", index);
+        
+        let modal = document.getElementById(`skinDetailsModal-${index}`);
+        console.log("Pronađen modal:", modal);
+        
+        if (modal) {
+            modal.style.display = "flex";
+        } else {
+            console.error("Modal ne postoji za index:", index);
+        }
+    }
+});
+            }
+            
+        });
+    </script>
+    
+    
+</body>
+
+</html>
