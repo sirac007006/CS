@@ -14,6 +14,7 @@
             --text-primary: #ffffff;
             --text-secondary: #9ca3af;
             --border-color: #2a2a2a;
+            --button-primary: #5c2cf1;
         }
 
         body {
@@ -40,6 +41,7 @@
             display: flex;
             align-items: center;
             gap: 2rem;
+            padding-left: 2rem;
         }
 
         .logo {
@@ -47,41 +49,93 @@
             font-size: 1.5rem;
             font-weight: bold;
             text-decoration: none;
-            margin-right: 2rem;
-            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        nav a {
+        .nav-links a {
             color: var(--text-primary);
             text-decoration: none;
             font-size: 1rem;
-            transition: color 0.2s;
-            position: relative;
-        }
-
-        .nav-links a:not(.logo)::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.2s;
-        }
-
-        .nav-links a:not(.logo):hover::after {
-            width: 100%;
         }
 
         .nav-links a:hover {
             color: var(--primary);
         }
-
+        
         .top-nav-right {
             display: flex;
             align-items: center;
             gap: 1.5rem;
+            margin-left: auto;
+        }
+        
+        .currency-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .sign-in-button {
+            background-color: var(--button-primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .sign-in-button:hover {
+            background-color: #4a23c2;
+            transform: translateY(-1px);
+        }
+        
+        
+        .nav-links a:not(.logo):hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .currency-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .sign-in-button {
+            background-color: var(--button-primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .sign-in-button:hover {
+            background-color: #4a23c2;
+            transform: translateY(-1px);
         }
 
 
